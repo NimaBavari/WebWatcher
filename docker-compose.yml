@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  producer:
+    build: producer
+    volumes:
+      - type: bind
+        source: ./producer
+        target: /producer
+    working_dir: /producer
+    command: 'python3 main.py'
+
+  consumer:
+    build: consumer
+    volumes:
+      - type: bind
+        source: ./consumer
+        target: /consumer
+    working_dir: /consumer
+    command: 'python3 main.py'
+
+  test:
+    build: producer
+    command: 'python3 -m unittest'
